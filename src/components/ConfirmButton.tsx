@@ -1,4 +1,3 @@
-import { Button } from "@/components/ui/button"
 import {
     Dialog,
     DialogContent,
@@ -11,6 +10,7 @@ import {
 import { CheckCircleIcon } from "lucide-react"
 import Image from "next/image";
 import Link from "next/link";
+import { Button } from "@/components/ui/button"
 
 const orders = [
     {
@@ -87,12 +87,12 @@ export function ConfirmButton() {
                 </div>
 
                 <Button className="w-full h-10" asChild>
-                    <Link href="/" >
+                    <Link href="/">
                         Start a new order
                     </Link>
-                    <Button>
-                    </DialogContent>
-                </Dialog>
+                </Button>
+            </DialogContent>
+        </Dialog>
 
-                )
+    )
 }
