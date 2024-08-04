@@ -51,8 +51,8 @@ export function ConfirmButton() {
             <DialogContent>
                 <DialogHeader>
                     <CheckCircleIcon className="size-10 text-green-600 mb-4" />
-                    <DialogTitle className="text-8xl font-extrabold">Order Confirmed</DialogTitle>
-                    <DialogDescription>
+                    <DialogTitle className="text-3xl md:text-4xl font-extrabold">Order Confirmed</DialogTitle>
+                    <DialogDescription className="text-sm">
                         We hope you enjoy your food!
                     </DialogDescription>
                 </DialogHeader>
@@ -62,18 +62,38 @@ export function ConfirmButton() {
                     <div className="grid grid-cols-1">
                         {orders.map((order, index) => {
                             return (
-                                <div className="flex jusify-between items-center" key={index}>
-                                    <div className="size-[40px]">
-                                        <Image
-                                            src={`/images/${order.image}`}
-                                            className="size-full object-cover"
-                                            width={40}
-                                            height={40}
-                                            alt={order.name}
-                                        />
+                                <div className="flex justify-between items-center py-4 border-b-[1px] border-muted-foreground/30" key={index}>
+                                    <div className="h-full flex items-center">
+                                        <div className="size-[40px] me-2">
+                                            <Image
+                                                src={`/images/${order.image}`}
+                                                className="size-full object-cover"
+                                                width={40}
+                                                height={40}
+                                                alt={order.name}
+                                            />
+                                        </div>
+
+                                        <div className="h-full flex flex-col justify-between">
+                                            <h3 className="text-sm font-semibold">{order.name}</h3>
+                                            <div className="flex items-center gap-3 text-sm">
+                                                <span className="text-primary font-bold">
+                                                    <span className="sr-only">quantity</span>
+                                                    {order.quantity}X
+                                                </span>
+
+                                                <span className="text-muted-foreground font-semibold">
+                                                    @ ${order.price}
+                                                </span>
+
+                                            </div>
+                                        </div>
                                     </div>
 
 
+                                    <span className="text-muted font-bold">
+                                        ${(order.price * order.quantity).toFixed(2)}
+                                    </span>
                                 </div>
                             )
                         })}
@@ -92,7 +112,7 @@ export function ConfirmButton() {
                     </Link>
                 </Button>
             </DialogContent>
-        </Dialog>
+        </Dialog >
 
     )
 }

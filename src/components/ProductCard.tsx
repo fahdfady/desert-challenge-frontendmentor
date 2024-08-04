@@ -16,7 +16,10 @@ export function ProductCard({ product }: { product: any }) {
                     className="size-full object-cover rounded-xl"
                 />
 
-                <AddToCartButton className="absolute -bottom-2 left-1/2 transform -translate-x-1/2"/>
+                <AddToCartButton
+                    className="absolute -bottom-5 left-1/2 transform -translate-x-1/2"
+                    product={product}
+                />
             </div>
 
             <div className="space-y-1">

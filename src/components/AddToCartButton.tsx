@@ -1,25 +1,62 @@
 "use client"
 
+import { useEffect, useState } from "react";
 import { ShoppingCartIcon } from "lucide-react";
 import { Button } from "./ui/button";
-import { useState } from "react";
-import { cn } from "@/lib/utils";
 
-export function AddToCartButton({ className }: { className?: string }) {
+import { cn } from "@/lib/utils";
+import { CartItem, Product } from "@/lib/types";
+
+export function AddToCartButton({ className, product }: { className?: string, product: Product }) {
     const [addedToCart, setAddedToCart] = useState(false);
     const [quantity, setQuantity] = useState(1);
 
+    useEffect(() => {
+        const cart = JSON.parse(localStorage.getItem('cart') || '[]');
+        const cartItem = cart.find((item: CartItem) => item.id === product.id);
+        if (cartItem) {
+            setAddedToCart(true);
+            setQuantity(cartItem.quantity);
+        }
+    }, [product.id]);
+
+
     const handleAddToCart = () => {
+        const cart = JSON.parse(localStorage.getItem('cart') || '[]');
+        const cartItem = cart.find((item: CartItem) => item.id === product.id);
+
+        if (cartItem) {
+            cartItem.quantity += quantity;
+        } else {
+            cart.push({ ...product, quantity });
+        }
+
+        localStorage.setItem('cart', JSON.stringify(cart));
         setAddedToCart(true);
     };
 
     const incrementQuantity = () => {
-        setQuantity((prev: number) => prev + 1);
+        setQuantity((prev) => prev + 1);
+        updateCartQuantity(1);
     };
 
     const decrementQuantity = () => {
-        setQuantity((prev: number) => (prev > 1 ? prev - 1 : 1));
+        if (quantity > 1) {
+            setQuantity((prev) => prev - 1);
+            updateCartQuantity(-1);
+        }
     };
+
+    const updateCartQuantity = (change: number) => {
+        const cart = JSON.parse(localStorage.getItem('cart') || '[]');
+        const cartItem = cart.find((item: CartItem) => item.id === product.id);
+
+        if (cartItem) {
+            cartItem.quantity += change;
+            localStorage.setItem('cart', JSON.stringify(cart));
+        }
+    };
+
 
     return (
         <div className={cn(

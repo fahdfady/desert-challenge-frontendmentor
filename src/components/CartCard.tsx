@@ -1,30 +1,21 @@
+"use client"
+
 import { LeafIcon, XCircleIcon } from "lucide-react";
 import { Button } from "./ui/button";
 import { ConfirmButton } from "./ConfirmButton";
 import Image from "next/image";
+import { useEffect, useState } from "react";
+import { CartItem } from "@/lib/types";
 
-const orders = [
-    {
-        id: 1,
-        name: 'Classic Tiramisu',
-        price: 5.50,
-        quantity: 1,
-    },
-    {
-        id: 2,
-        name: 'Vanilla Bean Creme Brulee',
-        price: 7.00,
-        quantity: 4,
-    },
-    {
-        id: 3,
-        name: 'Vanilla Panna Cotta',
-        price: 6.50,
-        quantity: 2,
-    },
-]
 
 export function CartCard() {
+    const [orders, setOrders] = useState<CartItem[]>([]);
+
+    useEffect(() => {
+        const storedCart = JSON.parse(localStorage.getItem('cart') || '[]');
+        setOrders(storedCart);
+    }, [orders]);
+
     const totalOrders = orders.reduce((acc, order) => acc + order.quantity, 0);
     const totalPrice = orders.reduce((acc, order) => acc + order.price * order.quantity, 0);
 
