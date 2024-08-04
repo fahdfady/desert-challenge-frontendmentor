@@ -16,7 +16,7 @@ const orders = [
     },
     {
         id: 3,
-        name: 'Classic Tiramisu',
+        name: 'Vanilla Panna Cotta',
         price: 6.50,
         quantity: 2,
     },
@@ -27,7 +27,7 @@ export function CartCard() {
     const totalPrice = orders.reduce((acc, order) => acc + order.price * order.quantity, 0);
 
     return (
-        <div className="bg-card rounded-2xl w-96 min-h-[300px] p-4 md:p-6">
+        <div className="bg-card rounded-2xl min-w-64 sm:min-w-96 min-h-[300px] h-fit p-4 md:p-6">
             <h2 className='text-2xl font-extrabold text-primary mb-4'>Your Cart ({totalOrders})</h2>
 
             <div className="grid grid-cols-1 gap-y-2 mb-3">
