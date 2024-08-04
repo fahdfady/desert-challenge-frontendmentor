@@ -1,5 +1,6 @@
 import { LeafIcon, XCircleIcon } from "lucide-react";
 import { Button } from "./ui/button";
+import { ConfirmButton } from "./ConfirmButton";
 
 const orders = [
     {
@@ -71,10 +72,7 @@ export function CartCard() {
             </div>
 
 
-            <Button
-                className="w-full my-2"
-                size="lg"
-            >Confirm Order</Button>
+            <ConfirmButton />
         </div>
     )
 }
